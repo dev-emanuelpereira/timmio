@@ -41,4 +41,14 @@ public class UsuarioController implements GenericController {
                 ).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarUsuario(@PathVariable Integer id) {
+        var usuarioEncontrado = service.obterPorId(id);
+        if (usuarioEncontrado.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        service.deletarUsuario(usuarioEncontrado.get());
+        return ResponseEntity.ok().build();
+    }
+
 }

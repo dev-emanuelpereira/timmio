@@ -9,4 +9,8 @@ public record ErroResposta (Integer status, String mensage, List<ErroCampo> erro
     public static ErroResposta conflito(String mensagem) {
         return new ErroResposta(HttpStatus.CONFLICT.value(), mensagem, List.of());
     }
+
+    public static ErroResposta naoEncontrado(String mensagem) {
+        return new ErroResposta(HttpStatus.NOT_FOUND.value(), mensagem, List.of());
+    }
 }

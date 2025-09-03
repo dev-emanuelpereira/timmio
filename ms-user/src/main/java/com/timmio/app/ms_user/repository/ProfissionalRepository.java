@@ -1,6 +1,7 @@
 package com.timmio.app.ms_user.repository;
 
 import com.timmio.app.ms_user.model.Profissional;
+import com.timmio.app.ms_user.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -8,4 +9,6 @@ import java.util.Optional;
 public interface ProfissionalRepository extends JpaRepository<Profissional, Integer> {
 
     Optional<Profissional> findByNomeProfissional(String nomeProfissional);
+
+    boolean existsByUsuario(Usuario usuario);
 }

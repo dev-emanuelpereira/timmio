@@ -38,4 +38,14 @@ public class ProfissionalController implements GenericController {
                 }
         ).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPorId (@PathVariable("id") Integer id) {
+        var profissionalEncontrado = service.obterPorId(id);
+        if (profissionalEncontrado.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        service.deletar(profissionalEncontrado.get());
+        return ResponseEntity.ok().build();
+    }
 }

@@ -3,6 +3,7 @@ package com.timmio.app.ms_user.controller.common;
 import com.timmio.app.ms_user.controller.dto.ErroCampo;
 import com.timmio.app.ms_user.controller.dto.ErroResposta;
 import com.timmio.app.ms_user.exceptions.ClienteDuplicadoException;
+import com.timmio.app.ms_user.exceptions.OperacaoNaoPermitidaException;
 import com.timmio.app.ms_user.exceptions.ProfissionalDuplicadoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -37,5 +38,11 @@ public class GlobalExceptionHandler {
                         erroCampo -> new ErroCampo(erroCampo.getField(), erroCampo.getDefaultMessage())
                 ).toList();
         return new ErroResposta(HttpStatus.UNPROCESSABLE_ENTITY.value(), "Erro de validação", erroCampos);
+    }
+
+    @ExceptionHandler(OperacaoNaoPermitidaException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErroResposta handleOperacaoNaoPermitidaException (OperacaoNaoPermitidaException e) {
+        return ErroResposta.naoEncontrado(e.getMessage());
     }
 }

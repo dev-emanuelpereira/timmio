@@ -25,5 +25,7 @@ public class ProfissionalService {
         return repository.findById(id);
     }
 
-    public void deletarPorId(Integer id) { repository.deleteById(id); }
+    public void deletar(Profissional profissional) {
+        repository.delete(profissional);
+    }
 }
